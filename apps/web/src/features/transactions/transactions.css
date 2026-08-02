@@ -1,0 +1,459 @@
+.transactions-page {
+  position: relative;
+  display: grid;
+  gap: var(--space-5);
+}
+
+.transactions-head {
+  align-items: flex-end;
+}
+
+.transactions-head .actions {
+  justify-content: flex-end;
+}
+
+.transactions-head .month-picker {
+  width: 190px;
+}
+
+.transaction-controls {
+  display: grid;
+  gap: 0;
+  padding: var(--space-5);
+}
+
+.transaction-controls .field input {
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+.transaction-controls .field input::placeholder {
+  color: var(--muted);
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) auto;
+  gap: var(--space-4);
+  align-items: end;
+}
+
+.filter-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  justify-content: flex-end;
+  padding: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--surface-container-low);
+}
+
+.filter-label {
+  padding-inline: var(--space-3) var(--space-2);
+  color: var(--fg-2);
+  font-size: var(--text-sm);
+  font-weight: 650;
+}
+
+.filter-button {
+  min-height: 38px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  color: var(--fg-2);
+  font-weight: 750;
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard);
+}
+
+.filter-button:hover,
+.filter-button.active {
+  background: var(--surface-container-lowest);
+  color: #274b5b;
+  box-shadow: var(--shadow-card);
+}
+
+.transaction-form {
+  max-width: none;
+}
+
+.transactions-page .surface:first-of-type {
+  background:
+    linear-gradient(180deg, oklch(0.995 0.004 164), var(--surface));
+}
+
+.transactions-page .fab-button.button.button-icon {
+  position: fixed;
+  right: clamp(20px, 4vw, 44px);
+  bottom: clamp(20px, 4vw, 44px);
+  left: auto;
+  top: auto;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 0;
+  background: var(--accent);
+  color: var(--accent-on);
+  box-shadow: var(--shadow-soft);
+}
+
+.transactions-page .fab-button.button.button-icon svg {
+  width: 28px;
+  height: 28px;
+  color: currentColor;
+  stroke-width: 2.2;
+}
+
+.transactions-page .fab-button.button.button-icon:hover,
+.transactions-page .fab-button.button.button-icon:focus-visible {
+  background: color-mix(in oklab, var(--accent), black 8%);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.transaction-dialog {
+  backdrop-filter: blur(3px);
+}
+
+.transaction-dialog .dialog.transaction-modal {
+  width: min(560px, 100%);
+  max-height: min(760px, 92vh);
+  overflow: hidden;
+  border-radius: 32px;
+  padding: 0;
+  background: var(--surface-container-lowest);
+  box-shadow: var(--shadow-soft);
+}
+
+.transaction-dialog .modal-head {
+  min-height: 76px;
+  align-items: center;
+  padding: var(--space-4) var(--space-8);
+  border-bottom: 1px solid color-mix(in oklab, var(--border), transparent 65%);
+}
+
+.transaction-dialog .modal-head h2 {
+  margin: 0;
+  color: var(--fg);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.transaction-dialog .modal-close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 0;
+  background: transparent;
+  color: var(--fg-2);
+  box-shadow: none;
+}
+
+.transaction-dialog .modal-close:hover,
+.transaction-dialog .modal-close:focus-visible {
+  background: var(--surface-container-low);
+  color: var(--fg);
+  outline: none;
+  transform: none;
+}
+
+.transaction-dialog .transaction-form {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(92vh - 76px);
+}
+
+.transaction-dialog .modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-height: calc(92vh - 152px);
+  overflow-y: auto;
+  padding: var(--space-8);
+}
+
+.transaction-dialog .amount-entry {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  padding-block: var(--space-2);
+}
+
+.transaction-dialog .amount-entry label,
+.transaction-dialog .modal-field > span:first-child {
+  color: var(--fg-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.transaction-dialog .amount-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.transaction-dialog .amount-line span {
+  color: var(--accent);
+  font-size: var(--text-xl);
+  font-weight: 500;
+}
+
+.transaction-dialog .amount-line input {
+  width: min(280px, 70%);
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--fg);
+  text-align: center;
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.transaction-dialog .amount-line input:focus {
+  outline: none;
+}
+
+.transaction-dialog .transaction-toggle {
+  align-self: center;
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--surface-container-low);
+}
+
+.transaction-dialog .transaction-toggle button {
+  min-height: 40px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-6);
+  background: transparent;
+  color: var(--fg-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.transaction-dialog .transaction-toggle button.active {
+  background: var(--surface-container-lowest);
+  color: var(--fg);
+  box-shadow: var(--shadow-card);
+}
+
+.transaction-dialog .modal-divider {
+  height: 1px;
+  margin-block: var(--space-2);
+  background: color-mix(in oklab, var(--border), transparent 65%);
+}
+
+.transaction-dialog .form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  width: 100%;
+}
+
+.transaction-dialog .modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+}
+
+.transaction-dialog .soft-input {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 52px;
+  border-radius: 14px;
+  padding: 0 var(--space-4);
+  background: var(--surface-container-low);
+  color: var(--fg);
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard);
+}
+
+.transaction-dialog .modal-field input,
+.transaction-dialog .modal-field select,
+.transaction-dialog .modal-field textarea {
+  width: 100%;
+  border: 0;
+  color: var(--fg);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+.transaction-dialog .modal-field input,
+.transaction-dialog .modal-field select {
+  min-height: 52px;
+  padding: 0;
+  background: transparent;
+}
+
+.transaction-dialog .modal-field > select.soft-input {
+  padding: 0 var(--space-4);
+  background: var(--surface-container-low);
+}
+
+.transaction-dialog .modal-field textarea {
+  min-height: 104px;
+  resize: none;
+  border-radius: 14px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-container-low);
+}
+
+.transaction-dialog .modal-field textarea::placeholder {
+  color: var(--muted);
+}
+
+.transaction-dialog .soft-input svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  color: var(--fg-2);
+}
+
+.transaction-dialog .soft-input:hover,
+.transaction-dialog .modal-field > select.soft-input:hover,
+.transaction-dialog .modal-field textarea:hover {
+  background: var(--surface-container);
+}
+
+.transaction-dialog .soft-input:focus-within,
+.transaction-dialog .modal-field > select.soft-input:focus,
+.transaction-dialog .modal-field textarea:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.transaction-dialog .modal-field input:focus,
+.transaction-dialog .modal-field select:focus {
+  outline: none;
+}
+
+.transaction-dialog .status {
+  margin: 0 var(--space-8) var(--space-4);
+}
+
+.transaction-dialog .modal-footer {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-8);
+  border-top: 1px solid color-mix(in oklab, var(--border), transparent 65%);
+  background: var(--surface-container-lowest);
+}
+
+.transaction-dialog .modal-action {
+  min-width: 128px;
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-6);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.transaction-dialog .modal-action.secondary {
+  background: transparent;
+  color: var(--fg-2);
+  box-shadow: none;
+}
+
+.transaction-dialog .modal-action.secondary:hover {
+  background: var(--surface-container-low);
+}
+
+.transaction-dialog .modal-action.primary {
+  background: var(--accent);
+  color: var(--accent-on);
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 760px) {
+  .transactions-head {
+    align-items: flex-start;
+  }
+
+  .transactions-head .actions {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .transactions-head .month-picker {
+    width: 100%;
+  }
+
+  .filter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-group {
+    justify-content: flex-start;
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .filter-label {
+    width: 100%;
+    padding-block: var(--space-2) 0;
+  }
+
+  .filter-button {
+    flex: 1 1 96px;
+  }
+
+  .transaction-controls {
+    justify-content: flex-start;
+  }
+
+  .transactions-page .fab-button.button.button-icon {
+    right: clamp(20px, 4vw, 44px);
+    bottom: clamp(20px, 4vw, 44px);
+  }
+
+  .transaction-dialog .dialog.transaction-modal {
+    border-radius: 28px;
+  }
+
+  .transaction-dialog .modal-head,
+  .transaction-dialog .modal-body,
+  .transaction-dialog .modal-footer {
+    padding-inline: var(--space-5);
+  }
+
+  .transaction-dialog .transaction-toggle {
+    width: 100%;
+  }
+
+  .transaction-dialog .transaction-toggle button {
+    flex: 1;
+    padding-inline: var(--space-3);
+  }
+
+  .transaction-dialog .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="WhySpend">
+  <rect width="128" height="128" fill="oklch(0.55 0.105 230)" />
+  <path d="M30 73c0-20 14-35 34-35s34 15 34 35v16H30V73Z" fill="oklch(0.98 0.006 230)" />
+  <path d="M49 65h32M49 80h24" stroke="oklch(0.30 0.075 232)" stroke-width="8" stroke-linecap="round" />
+  <circle cx="91" cy="43" r="14" fill="oklch(0.73 0.14 154)" />
+</svg>

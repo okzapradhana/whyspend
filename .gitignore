@@ -1,0 +1,12 @@
+node_modules
+.turbo
+pnpm-lock.yaml
+.DS_Store
+apps/*/dist
+apps/*/coverage
+apps/*/playwright-report
+apps/*/test-results
+apps/api/prisma/dev.db
+apps/api/prisma/dev.db-journal
+.env
+.env.local
