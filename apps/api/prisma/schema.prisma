@@ -1,0 +1,177 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum HouseholdRole {
+  owner
+  member
+}
+
+enum RecordType {
+  income
+  expense
+  savings
+}
+
+enum RecordScope {
+  household
+  member
+}
+
+enum CategoryScope {
+  household
+  member
+  both
+}
+
+enum InvitationStatus {
+  pending
+  accepted
+  revoked
+}
+
+model User {
+  id                    String                @id @default(uuid())
+  email                 String                @unique
+  displayName           String
+  password              String
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  memberships           HouseholdMember[]
+  createdCategories     Category[]            @relation("CategoryCreatedBy")
+  ownedTransactions     Transaction[]         @relation("TransactionOwner")
+  createdTransactions   Transaction[]         @relation("TransactionCreatedBy")
+  updatedTransactions   Transaction[]         @relation("TransactionUpdatedBy")
+  createdBudgets        CategoryBudget[]      @relation("BudgetCreatedBy")
+  updatedBudgets        CategoryBudget[]      @relation("BudgetUpdatedBy")
+  sentInvitations       HouseholdInvitation[] @relation("InvitationCreatedBy")
+  acceptedInvitations   HouseholdInvitation[] @relation("InvitationAcceptedBy")
+}
+
+model Household {
+  id           String                @id @default(uuid())
+  name         String
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+  members      HouseholdMember[]
+  categories   Category[]
+  budgets      CategoryBudget[]
+  transactions Transaction[]
+  goals        SavingsGoal[]
+  invitations  HouseholdInvitation[]
+}
+
+model HouseholdMember {
+  id          String        @id @default(uuid())
+  householdId String
+  userId      String
+  role        HouseholdRole
+  joinedAt    DateTime      @default(now())
+  household   Household     @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([householdId, userId])
+  @@index([userId])
+}
+
+model HouseholdInvitation {
+  id               String           @id @default(uuid())
+  householdId      String
+  email            String
+  token            String           @unique
+  status           InvitationStatus @default(pending)
+  invitedByUserId  String
+  acceptedByUserId String?
+  expiresAt        DateTime
+  acceptedAt       DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  household        Household        @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  invitedByUser    User             @relation("InvitationCreatedBy", fields: [invitedByUserId], references: [id], onDelete: Cascade)
+  acceptedByUser   User?            @relation("InvitationAcceptedBy", fields: [acceptedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([householdId, status])
+}
+
+model Category {
+  id              String         @id @default(uuid())
+  householdId      String
+  name            String
+  type            RecordType
+  scope           CategoryScope
+  isArchived      Boolean        @default(false)
+  createdByUserId String
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  household       Household      @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  createdByUser   User           @relation("CategoryCreatedBy", fields: [createdByUserId], references: [id], onDelete: Cascade)
+  budgets         CategoryBudget[]
+  transactions    Transaction[]
+  savingsGoal     SavingsGoal?
+
+  @@index([householdId, type, isArchived])
+}
+
+model SavingsGoal {
+  id             String    @id @default(uuid())
+  householdId     String
+  categoryId      String    @unique
+  targetAmount   Int
+  startingAmount Int       @default(0)
+  targetDate     DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  household      Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  category       Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([householdId])
+}
+
+model CategoryBudget {
+  id              String    @id @default(uuid())
+  householdId      String
+  categoryId       String
+  month           String
+  amount          Int
+  createdByUserId String
+  updatedByUserId String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  household       Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  category        Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdByUser   User      @relation("BudgetCreatedBy", fields: [createdByUserId], references: [id], onDelete: Cascade)
+  updatedByUser   User      @relation("BudgetUpdatedBy", fields: [updatedByUserId], references: [id], onDelete: Cascade)
+
+  @@unique([householdId, categoryId, month])
+  @@index([householdId, month])
+}
+
+model Transaction {
+  id              String      @id @default(uuid())
+  householdId      String
+  ownerUserId      String
+  categoryId       String
+  type            RecordType
+  scope           RecordScope
+  amount          Int
+  occurredOn      DateTime
+  month           String
+  note            String?
+  createdByUserId String
+  updatedByUserId String
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  household       Household   @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  ownerUser       User        @relation("TransactionOwner", fields: [ownerUserId], references: [id], onDelete: Cascade)
+  category        Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdByUser   User        @relation("TransactionCreatedBy", fields: [createdByUserId], references: [id], onDelete: Cascade)
+  updatedByUser   User        @relation("TransactionUpdatedBy", fields: [updatedByUserId], references: [id], onDelete: Cascade)
+
+  @@index([householdId, month, type])
+  @@index([householdId, categoryId, month])
+}

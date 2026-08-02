@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: whyspend-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: whyspend
+      POSTGRES_USER: whyspend
+      POSTGRES_PASSWORD: whyspend
+    ports:
+      - "54329:5432"
+    volumes:
+      - whyspend-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  whyspend-postgres-data:
