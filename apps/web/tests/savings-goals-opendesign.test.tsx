@@ -35,7 +35,7 @@ describe("OpenDesign savings goals conversion", () => {
     const { container } = render(<SavingsGoalsPage />);
 
     expect(screen.getByRole("heading", { name: /savings goals/i })).toBeInTheDocument();
-    expect(screen.getByText("Total Savings Progress")).toBeInTheDocument();
+    expect(screen.getByText("Total savings progress")).toBeInTheDocument();
     expect(await screen.findByText("Emas")).toBeInTheDocument();
     expect(container.querySelector('[data-od-id="savings-head"]')).not.toBeNull();
     expect(container.querySelector('[data-od-id="savings-summary"]')).not.toBeNull();
@@ -58,7 +58,7 @@ describe("OpenDesign savings goals conversion", () => {
     expect(addDialog.querySelector(".goal-input-wrap")).not.toBeNull();
     expect(addDialog.querySelector(".goal-share-card")).not.toBeNull();
     expect(addDialog.querySelector(".goal-modal-footer")).not.toBeNull();
-    expect(screen.getByLabelText("Goal Name")).toBeInTheDocument();
+    expect(screen.getByLabelText("Goal name")).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Cancel" }));
 
     await userEvent.click(screen.getByRole("button", { name: /open emas menu/i }));

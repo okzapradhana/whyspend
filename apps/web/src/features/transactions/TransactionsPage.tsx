@@ -5,6 +5,7 @@ import { Button } from "../../components/Button";
 import { Dialog } from "../../components/Dialog";
 import { StatusMessage } from "../../components/StatusMessage";
 import { Input } from "../../components/Input";
+import { PageHeader, Surface, Toolbar } from "../../components/design-system";
 import type { RecordType, Transaction } from "../../lib/api/types";
 import { deleteTransaction, listTransactions } from "../../lib/api/transactions";
 import { TransactionForm } from "./TransactionForm";
@@ -79,16 +80,19 @@ export function TransactionsPage() {
 
   return (
     <main className="content page transactions-page">
-      <header className="page-head transactions-head page-header" data-od-id="transactions-head">
+      <PageHeader className="transactions-head" data-od-id="transactions-head">
         <div>
           <h1 className="page-title">Transactions</h1>
-          <p className="page-kicker kicker">Review a month, filter quickly, and use one familiar form for expenses, income, and savings.</p>
+          <p className="page-kicker">Review a month, filter quickly, and use one familiar form for expenses, income, and savings.</p>
         </div>
-        <div className="actions">
+        <Toolbar>
           <Input className="month-picker" label="Choose transaction month" type="month" value={month} onChange={(event) => setMonth(event.target.value)} />
-        </div>
-      </header>
-      <section className="card surface transaction-controls" aria-label="Transaction filters" data-od-id="transaction-controls">
+          <Button className="desktop-add-transaction" type="button" icon={<Plus size={18} />} onClick={openAddDialog}>
+            Add transaction
+          </Button>
+        </Toolbar>
+      </PageHeader>
+      <Surface className="transaction-controls" aria-label="Transaction filters" data-od-id="transaction-controls">
         <div className="filter-row">
           <Input label="Search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Category, owner, or note" />
           <div className="filter-menu filter-group" aria-label="Transaction type filters">
@@ -106,18 +110,18 @@ export function TransactionsPage() {
             ))}
           </div>
         </div>
-      </section>
-      <section className="transaction-list card surface" data-od-id="transaction-list">
+      </Surface>
+      <Surface className="transaction-list" data-od-id="transaction-list">
         <div className="section-heading">
           <h2>Transactions</h2>
           {status ? <StatusMessage tone="error">{status}</StatusMessage> : null}
         </div>
         <TransactionList transactions={filteredTransactions} loading={loading} onEdit={openEditDialog} onDelete={onDelete} />
-      </section>
+      </Surface>
       <Button className="fab-button" type="button" icon={<Plus size={18} />} iconOnly aria-label="Add transaction" onClick={openAddDialog}>
         Add transaction
       </Button>
-      <Dialog title={editing ? "Edit transaction" : "Add Expense"} open={formOpen} onClose={() => setFormOpen(false)} className="transaction-dialog">
+      <Dialog title={editing ? "Edit transaction" : "Add transaction"} open={formOpen} onClose={() => setFormOpen(false)} className="transaction-dialog">
         <TransactionForm
           householdId={activeHousehold.id}
           userId={user.id}

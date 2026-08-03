@@ -104,12 +104,12 @@ export function AuthPage() {
         </header>
 
         <section className="auth-card" aria-labelledby="auth-title">
-          <h1 className="auth-title" id="auth-title">{mode === "register" ? "Create Account" : mode === "forgot" ? "Reset your password" : "Welcome Back"}</h1>
+          <h1 className="auth-title" id="auth-title">{mode === "register" ? "Create account" : mode === "forgot" ? "Reset your password" : "Welcome back"}</h1>
           {mode === "forgot" ? <p className="auth-hint">Enter your email and we’ll send instructions if an account matches it.</p> : null}
           <form className="auth-form form-stack" onSubmit={onSubmit} noValidate={mode === "forgot"}>
             {mode === "register" ? (
               <div className="auth-field">
-                <label htmlFor="display-name">Display Name</label>
+                <label htmlFor="display-name">Display name</label>
                 <div className="auth-input-wrap">
                   <User aria-hidden="true" />
                   <input
@@ -127,7 +127,7 @@ export function AuthPage() {
             ) : null}
 
             <div className="auth-field">
-              <label htmlFor="email">{mode === "register" ? "Email Address" : "E-mail"}</label>
+              <label htmlFor="email">{mode === "register" ? "Email address" : "E-mail"}</label>
               <div className="auth-input-wrap">
                 <Mail aria-hidden="true" />
                 <input
@@ -186,12 +186,12 @@ export function AuthPage() {
               {status?.message ?? (mode === "register" ? "Ready to create account" : mode === "forgot" ? "Ready to send reset instructions" : "Ready to sign in")}
             </p>
             <Button className="auth-submit" type="submit" loading={submitting} icon={!submitting ? <ArrowRight size={18} /> : undefined}>
-              {mode === "register" ? "Create Account" : mode === "forgot" ? "Send reset link" : "Sign In"}
+              {mode === "register" ? "Create account" : mode === "forgot" ? "Send reset link" : "Sign in"}
             </Button>
           </form>
 
           {mode !== "forgot" ? <>
-            <div className="auth-divider" aria-hidden="true"><span>{mode === "register" ? "OR SIGN UP WITH" : "OR"}</span></div>
+            <div className="auth-divider" aria-hidden="true"><span>{mode === "register" ? "Or sign up with" : "Or"}</span></div>
             <button className="auth-social" type="button" onClick={() => showPlaceholder("Google sign-in is not available in phase 1.")}>
               <span className="auth-social-mark" aria-hidden="true">G</span>
               <span>Continue with Google</span>

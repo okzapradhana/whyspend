@@ -2,6 +2,7 @@ import { Calendar, Home, MoreVertical, Pencil, PiggyBank, Plane, ShieldCheck, Sm
 import type { CSSProperties } from "react";
 import { useState } from "react";
 import { Button } from "../../components/Button";
+import { Surface } from "../../components/design-system";
 import { formatMoney, formatPercent, ratioPercent } from "../../lib/finance";
 import type { SavingsGoal } from "../../lib/api/types";
 
@@ -17,7 +18,7 @@ export function SavingsGoalCard({ goal, onEdit, onDelete }: SavingsGoalCardProps
   const Icon = iconForGoal(goal.name);
 
   return (
-    <article className={`card goal-card${menuOpen ? " menu-open" : ""}`} data-goal-card>
+    <Surface as="article" className={`goal-card${menuOpen ? " menu-open" : ""}`} data-goal-card>
       <div className="card-head goal-card-head">
         <span className="row-icon" aria-hidden="true">
           <Icon size={20} />
@@ -76,7 +77,7 @@ export function SavingsGoalCard({ goal, onEdit, onDelete }: SavingsGoalCardProps
       <div className="progress" aria-label={`${goal.name} progress ${formatPercent(progress)}`}>
         <span style={{ "--value": `${progress * 100}%` } as CSSProperties} />
       </div>
-    </article>
+    </Surface>
   );
 }
 

@@ -182,6 +182,12 @@ Run OpenDesign source-structure comparison:
 pnpm test:structure
 ```
 
+Run the Serene Union design-system consistency check:
+
+```bash
+pnpm test:design-system
+```
+
 Run the combined OpenDesign gate:
 
 ```bash
@@ -203,6 +209,7 @@ Latest OpenDesign HTML port verification passed with `pnpm test`, `pnpm run buil
 - Budget insights implementation tasks: `specs/002-budget-insights/tasks.md`
 - Budget insights requirements-quality checklist: `specs/002-budget-insights/checklists/requirements-quality.md`
 - OpenDesign-guided website redesign spec: `specs/003-opendesign-redesign/spec.md`
+- Design-system consistency redesign spec: `specs/005-design-system-consistency/spec.md`
 - OpenDesign-guided website redesign implementation plan: `specs/003-opendesign-redesign/plan.md`
 - OpenDesign-guided website redesign research: `specs/003-opendesign-redesign/research.md`
 - OpenDesign-guided website redesign data model: `specs/003-opendesign-redesign/data-model.md`

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../app/authState";
 import { Input } from "../../components/Input";
 import { StatusMessage } from "../../components/StatusMessage";
+import { LoadingState, MetricCard, PageHeader, Surface, Toolbar } from "../../components/design-system";
 import { getIncomeExpenseHistory, getMonthlySummary } from "../../lib/api/summaries";
 import type { HistoricalIncomeExpensePoint, MonthlySummary } from "../../lib/api/types";
 import { addMonths, currentMonth, formatMoney } from "../../lib/finance";
@@ -95,48 +96,48 @@ export function SummaryPage() {
 
   return (
     <main className="content page summary-page">
-      <header className="page-head page-header" data-od-id="dashboard-head">
+      <PageHeader data-od-id="dashboard-head">
         <div>
           <h1 className="page-title">{dashboardMonth} household overview</h1>
           <p className="page-kicker">Track shared spending, savings momentum, and the categories that need a quick conversation.</p>
         </div>
-        <div className="actions">
+        <Toolbar>
           <Input className="month-picker" label="Choose dashboard month" type="month" value={month} onChange={(event) => setMonth(event.target.value)} />
-        </div>
-      </header>
+        </Toolbar>
+      </PageHeader>
       {status ? <StatusMessage tone="error">{status}</StatusMessage> : null}
       {loading || !summary ? (
-        <div className="skeleton-block">Loading dashboard...</div>
+        <LoadingState>Loading dashboard...</LoadingState>
       ) : (
         <>
           <section className="summary-metrics metric-row grid grid-3" aria-label="Monthly totals" data-od-id="summary-metrics">
-            <article className="card metric metric-railed metric-income">
+            <MetricCard className="metric metric-railed metric-income">
               <div className="metric-top">
-                <span className="metric-label">Total Income</span>
+                <span className="metric-label">Total income</span>
                 <span className="metric-icon" aria-hidden="true" />
               </div>
               <strong className="metric-value num">{formatMoney(summary.totals.income)}</strong>
               {renderMetricNote(incomeDelta, "Current month total")}
-            </article>
-            <article className="card metric metric-railed metric-expense">
+            </MetricCard>
+            <MetricCard className="metric metric-railed metric-expense">
               <div className="metric-top">
-                <span className="metric-label">Total Expenses</span>
+                <span className="metric-label">Total expenses</span>
                 <span className="metric-icon" aria-hidden="true" />
               </div>
               <strong className="metric-value num">{formatMoney(summary.totals.expenses)}</strong>
               {renderMetricNote(expenseDelta, "Recorded expenses this month")}
-            </article>
-            <article className="card metric metric-railed metric-saving">
+            </MetricCard>
+            <MetricCard className="metric metric-railed metric-saving">
               <div className="metric-top">
-                <span className="metric-label">Net Savings</span>
+                <span className="metric-label">Net savings</span>
                 <span className="metric-icon" aria-hidden="true" />
               </div>
               <strong className="metric-value num">{formatMoney(summary.totals.savings)}</strong>
               {renderMetricNote(savingsDelta, "Reserved for shared goals")}
-            </article>
+            </MetricCard>
           </section>
           <section className="dashboard-charts dashboard-chart-pair summary-grid grid grid-2" data-od-id="dashboard-charts">
-            <article className="card surface">
+            <Surface as="article">
               <div className="card-head">
                 <div>
                   <h2 className="card-title">Monthly spending by category</h2>
@@ -144,22 +145,22 @@ export function SummaryPage() {
                 </div>
               </div>
               <CategoryChart summary={summary} onSelectCategory={() => undefined} />
-            </article>
-            <article className="card surface">
+            </Surface>
+            <Surface as="article">
               <div className="card-head">
                 <div>
-                  <h2 className="card-title">Budget Health</h2>
+                <h2 className="card-title">Budget health</h2>
                   <p className="card-subtitle">Progress towards monthly category limits.</p>
                 </div>
               </div>
               <BudgetStatusList statuses={summary.budgetStatuses ?? []} onSelectCategory={() => undefined} />
-            </article>
+            </Surface>
           </section>
           <section className="budget-and-trend grid" data-od-id="budget-and-trend">
-            <article className="card trend-card surface">
+            <Surface as="article" className="trend-card">
               <div className="card-head">
                 <div>
-                  <h2 className="card-title">Cash Flow Trend</h2>
+                <h2 className="card-title">Cash flow trend</h2>
                   <p className="card-subtitle">6-month overview of income, expenses, and savings.</p>
                 </div>
                 <div className="trend-legend" aria-label="Trend legend">
@@ -169,7 +170,7 @@ export function SummaryPage() {
                 </div>
               </div>
               <HistoricalIncomeExpenseChart data={history} />
-            </article>
+            </Surface>
           </section>
         </>
       )}

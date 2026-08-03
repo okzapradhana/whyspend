@@ -15,6 +15,7 @@
     "test:visual": "playwright test tests/e2e/opendesign-visual-regression.spec.ts",
     "test:tokens": "node scripts/compare-opendesign-tokens.mjs",
     "test:structure": "node scripts/compare-opendesign-structure.mjs",
+    "test:design-system": "node scripts/validate-design-system.mjs",
     "check:opendesign": "pnpm test:tokens && pnpm test:structure && pnpm test:visual"
   },
   "dependencies": {

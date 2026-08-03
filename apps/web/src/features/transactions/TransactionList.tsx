@@ -1,5 +1,6 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "../../components/Button";
+import { EmptyState, LoadingState, StatusChip, TableFrame } from "../../components/design-system";
 import type { Transaction } from "../../lib/api/types";
 
 const typeLabel = {
@@ -28,20 +29,20 @@ export function TransactionList({
   onDelete: (transaction: Transaction) => void;
 }) {
   if (loading) {
-    return <div className="skeleton-block">Loading transactions...</div>;
+    return <LoadingState>Loading transactions...</LoadingState>;
   }
 
   if (!transactions.length) {
     return (
-      <div className="empty-state">
+      <EmptyState>
         <h2>No transactions for this month yet.</h2>
         <p>Add one income, expense, or savings record to start building the monthly picture.</p>
-      </div>
+      </EmptyState>
     );
   }
 
   return (
-    <div className="table-wrap">
+    <TableFrame>
       <table className="data-table">
         <thead>
           <tr>
@@ -57,13 +58,13 @@ export function TransactionList({
         <tbody>
           {transactions.map((transaction) => (
             <tr key={transaction.id}>
-              <td>{transaction.occurredOn}</td>
-              <td><span className={`type-pill type-${transaction.type}`}>{typeLabel[transaction.type]}</span></td>
-              <td>{transaction.category.name}</td>
-              <td>{transaction.owner.displayName}</td>
-              <td>{transaction.note ?? (transaction.scope === "household" ? "Household" : "Personal")}</td>
-              <td className="align-right money">{formatMoney(transaction.amount)}</td>
-              <td>
+              <td data-label="Date">{transaction.occurredOn}</td>
+              <td data-label="Type"><StatusChip className={`type-${transaction.type}`}>{typeLabel[transaction.type]}</StatusChip></td>
+              <td data-label="Category / Goal">{transaction.category.name}</td>
+              <td data-label="Owner">{transaction.owner.displayName}</td>
+              <td data-label="Notes">{transaction.note ?? (transaction.scope === "household" ? "Household" : "Personal")}</td>
+              <td data-label="Amount" className="align-right money">{formatMoney(transaction.amount)}</td>
+              <td data-label="Actions">
                 <div className="row-actions">
                   <Button type="button" variant="ghost" icon={<Pencil size={15} />} onClick={() => onEdit(transaction)}>
                     Edit
@@ -77,6 +78,6 @@ export function TransactionList({
           ))}
         </tbody>
       </table>
-    </div>
+    </TableFrame>
   );
 }

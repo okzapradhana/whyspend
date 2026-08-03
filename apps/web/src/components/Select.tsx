@@ -12,7 +12,7 @@ export function Select({ label, error, hint, options, id, className, ...props }:
   const describedBy = [hint ? `${selectId}-hint` : "", error ? `${selectId}-error` : ""].filter(Boolean).join(" ") || undefined;
 
   return (
-    <label className={`field modal-field goal-field${error ? " field-invalid" : ""}${props.disabled ? " field-disabled" : ""}`} htmlFor={selectId}>
+    <label className={`field${error ? " field-invalid" : ""}${props.disabled ? " field-disabled" : ""}`} htmlFor={selectId}>
       <span>{label}</span>
       <select id={selectId} className={`soft-input${className ? ` ${className}` : ""}`} aria-invalid={Boolean(error)} aria-describedby={describedBy} {...props}>
         {options.map((option) => (

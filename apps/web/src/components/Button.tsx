@@ -11,8 +11,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   { variant = "primary", loading, icon, iconOnly, children, disabled, className, ...props },
   ref
 ) {
-  const odVariant = variant === "ghost" ? "btn-secondary" : variant === "danger" ? "btn-danger" : `btn-${variant}`;
-  const classes = ["btn", odVariant, "button", `button-${variant}`, iconOnly ? "icon-button button-icon" : "", loading ? "is-loading" : "", className ?? ""]
+  const classes = ["button", `button-${variant}`, iconOnly ? "button-icon" : "", loading ? "is-loading" : "", className ?? ""]
     .filter(Boolean)
     .join(" ");
 

@@ -24,7 +24,8 @@ describe("OpenDesign shared states", () => {
     expect(screen.getByText("Loading dashboard...")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /no transactions yet/i })).toBeInTheDocument();
     expect(screen.getByRole("alert")).toHaveTextContent("Could not load dashboard.");
-    expect(screen.getByRole("status")).toHaveTextContent("Budget saved.");
+    expect(screen.getAllByRole("status")).toHaveLength(2);
+    expect(screen.getByText("Budget saved.")).toHaveAttribute("role", "status");
     expect(screen.getByRole("button", { name: /working/i })).toBeDisabled();
     expect(screen.getByText(/no transactions for this month/i)).toBeInTheDocument();
   });

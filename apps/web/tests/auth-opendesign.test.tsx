@@ -32,7 +32,7 @@ describe("OpenDesign auth conversion", () => {
 
     await userEvent.click(screen.getByRole("button", { name: /create account/i }));
     expect(screen.getByRole("heading", { name: /create account/i })).toBeInTheDocument();
-    expect(screen.getByLabelText("Display Name")).toBeInTheDocument();
+    expect(screen.getByLabelText("Display name")).toBeInTheDocument();
     expect(screen.getByText(/at least 8 characters/i)).toBeInTheDocument();
   });
 });

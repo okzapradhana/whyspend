@@ -4,6 +4,7 @@ import { useAuth } from "../../app/authState";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { StatusMessage } from "../../components/StatusMessage";
+import { PageHeader, Surface } from "../../components/design-system";
 import { createHouseholdInvitation, getHousehold } from "../../lib/api/households";
 import type { HouseholdInvitation } from "../../lib/api/types";
 import { UnifiedCategoryCard } from "./UnifiedCategoryCard";
@@ -70,7 +71,7 @@ function HouseholdAccessCard({ householdId }: { householdId: string }) {
   }
 
   return (
-    <aside className="card settings-access-card" aria-label="Household access">
+    <Surface as="aside" className="settings-access-card" aria-label="Household access">
       <div className="settings-card-heading">
         <h2>Household access</h2>
         <p>Invite your spouse and keep shared categories visible to both members.</p>
@@ -127,7 +128,7 @@ function HouseholdAccessCard({ householdId }: { householdId: string }) {
           <p className="card-subtitle">No pending spouse invites.</p>
         )}
       </div>
-    </aside>
+    </Surface>
   );
 }
 
@@ -138,12 +139,12 @@ export function SettingsPage() {
 
   return (
     <main className="content page settings-page">
-      <header className="page-head settings-head page-header" data-od-id="settings-head">
+      <PageHeader className="settings-head" data-od-id="settings-head">
         <div>
           <h1 className="page-title">Settings</h1>
           <p>Manage categories, monthly budgets, and household access.</p>
         </div>
-      </header>
+      </PageHeader>
       <section className="settings-content grid grid-main" data-od-id="settings-content">
         <UnifiedCategoryCard householdId={activeHousehold.id} />
         <HouseholdAccessCard householdId={activeHousehold.id} />

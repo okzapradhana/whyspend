@@ -52,9 +52,9 @@ describe("OpenDesign transactions conversion", () => {
     expect((await screen.findAllByText("Subscription")).length).toBeGreaterThan(0);
 
     const addTransactionButton = screen.getByRole("button", { name: /add transaction/i });
-    expect(addTransactionButton).toHaveClass("button-icon");
+    expect(addTransactionButton).toHaveClass("desktop-add-transaction");
     await userEvent.click(addTransactionButton);
-    const dialog = screen.getByRole("dialog", { name: /add expense/i });
+    const dialog = screen.getByRole("dialog", { name: /add transaction/i });
     expect(dialog).toBeInTheDocument();
     await userEvent.click(within(dialog).getByRole("button", { name: "Savings" }));
     expect(await screen.findByLabelText("Goal")).toBeInTheDocument();

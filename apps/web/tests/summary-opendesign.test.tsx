@@ -59,20 +59,25 @@ vi.mock("../src/lib/api/transactions", () => ({
   listTransactions: vi.fn(async () => ({ transactions: [] }))
 }));
 
+vi.mock("../src/lib/finance", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("../src/lib/finance")>()),
+  currentMonth: () => "2026-06"
+}));
+
 describe("OpenDesign dashboard conversion", () => {
   it("renders dashboard metrics, charts, budget health, and selected month control", async () => {
     render(<SummaryPage />);
 
     expect(await screen.findByRole("heading", { name: /june household overview/i })).toBeInTheDocument();
     expect(screen.getByLabelText("Choose dashboard month")).toBeInTheDocument();
-    expect(screen.getByText("Total Income")).toBeInTheDocument();
-    expect(screen.getByText("Total Expenses")).toBeInTheDocument();
-    expect(screen.getByText("Net Savings")).toBeInTheDocument();
+    expect(screen.getByText("Total income")).toBeInTheDocument();
+    expect(screen.getByText("Total expenses")).toBeInTheDocument();
+    expect(screen.getByText("Net savings")).toBeInTheDocument();
     expect(screen.queryByText("Remaining")).not.toBeInTheDocument();
     expect(screen.queryByText("Budgeted expenses")).not.toBeInTheDocument();
     expect(screen.getByText("Monthly spending by category")).toBeInTheDocument();
-    expect(screen.getByText("Budget Health")).toBeInTheDocument();
-    expect(screen.getByText("Cash Flow Trend")).toBeInTheDocument();
+    expect(screen.getByText("Budget health")).toBeInTheDocument();
+    expect(screen.getByText("Cash flow trend")).toBeInTheDocument();
     expect(screen.getByLabelText("Trend legend")).toBeInTheDocument();
     expect(screen.queryByText("Monthly stories")).not.toBeInTheDocument();
     expect(screen.queryByText("Spending vs budget")).not.toBeInTheDocument();
