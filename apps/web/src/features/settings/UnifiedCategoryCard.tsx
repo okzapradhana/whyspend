@@ -4,6 +4,7 @@ import { Button } from "../../components/Button";
 import { Dialog } from "../../components/Dialog";
 import { Select } from "../../components/Select";
 import { StatusMessage } from "../../components/StatusMessage";
+import { Surface } from "../../components/design-system";
 import { deleteCategory, listCategories, updateCategory } from "../../lib/api/categories";
 import { deleteCategoryBudget, listCategoryBudgets, saveCategoryBudget } from "../../lib/api/budgets";
 import type { BudgetableCategory, Category, RecordType } from "../../lib/api/types";
@@ -130,7 +131,7 @@ export function UnifiedCategoryCard({ householdId }: { householdId: string }) {
 
   return (
     <>
-      <section className="card unified-category-card">
+      <Surface className="unified-category-card">
         <div className="settings-card-heading settings-category-heading">
           <div>
             <h2>Categories and budgets</h2>
@@ -165,7 +166,7 @@ export function UnifiedCategoryCard({ householdId }: { householdId: string }) {
           onSaveBudget={onSaveBudget}
           onRemoveBudget={onRemoveBudget}
         />
-      </section>
+      </Surface>
 
       <Dialog
         title={editing ? "Edit category" : "Add category"}

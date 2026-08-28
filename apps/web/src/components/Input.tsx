@@ -11,7 +11,7 @@ export function Input({ label, error, hint, id, className, ...props }: InputProp
   const describedBy = [hint ? `${inputId}-hint` : "", error ? `${inputId}-error` : ""].filter(Boolean).join(" ") || undefined;
 
   return (
-    <label className={`field modal-field auth-field goal-field${error ? " field-invalid" : ""}${props.disabled ? " field-disabled" : ""}`} htmlFor={inputId}>
+    <label className={`field${error ? " field-invalid" : ""}${props.disabled ? " field-disabled" : ""}`} htmlFor={inputId}>
       <span>{label}</span>
       <input id={inputId} className={`soft-input${className ? ` ${className}` : ""}`} aria-invalid={Boolean(error)} aria-describedby={describedBy} {...props} />
       {hint ? (

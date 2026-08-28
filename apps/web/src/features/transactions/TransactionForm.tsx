@@ -141,7 +141,7 @@ export function TransactionForm({
         <div className="modal-divider" />
 
         <div className="form-grid">
-          <label className="modal-field" htmlFor="transaction-date">
+          <label className="field" htmlFor="transaction-date">
             <span>Date</span>
             <span className="soft-input with-icon">
               <input
@@ -164,7 +164,7 @@ export function TransactionForm({
           onChange={(event) => setCategoryId(event.target.value)}
           required
         />
-        <label className="modal-field" htmlFor="transaction-note">
+        <label className="field" htmlFor="transaction-note">
           <span>Note (Optional)</span>
           <textarea
             id="transaction-note"

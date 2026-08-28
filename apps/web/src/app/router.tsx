@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { BarChart3, LogOut, Menu, ReceiptText, Settings, Target, X } from "lucide-react";
 import { createBrowserRouter, Link, NavLink, Navigate, Outlet, useNavigate, useParams } from "react-router-dom";
 import { Button } from "../components/Button";
+import { LoadingState, PageHeader, Surface } from "../components/design-system";
 import { AuthPage } from "../features/auth/AuthPage";
 import { HouseholdSetupPage } from "../features/auth/HouseholdSetupPage";
 import { UpdatePasswordPage } from "../features/auth/UpdatePasswordPage";
@@ -19,7 +20,7 @@ import {
 const primaryNavItems = [
   { to: "/dashboard", label: "Dashboard", icon: <BarChart3 size={18} /> },
   { to: "/transactions", label: "Transactions", icon: <ReceiptText size={18} /> },
-  { to: "/savings-goals", label: "Savings Goals", icon: <Target size={18} /> }
+  { to: "/savings-goals", label: "Savings goals", icon: <Target size={18} /> }
 ];
 
 const secondaryNavItems = [
@@ -197,7 +198,7 @@ export function ProtectedRoute() {
     return <Navigate to="/update-password" replace />;
   }
   if (loading) {
-    return <main className="page"><div className="skeleton-block">Loading workspace...</div></main>;
+    return <main className="page"><LoadingState>Loading workspace...</LoadingState></main>;
   }
   if (!user) {
     return <Navigate to="/auth" replace />;
@@ -235,17 +236,17 @@ export function RecoveryRouteGuard() {
 function SupportPage() {
   return (
     <main className="content page narrow-page">
-      <header className="page-head page-header">
+      <PageHeader>
         <div>
           <span className="page-kicker kicker">Support</span>
           <h1 className="page-title">Household support</h1>
           <p>Send questions, data corrections, or setup requests to the household owner for now.</p>
         </div>
-      </header>
-      <section className="surface">
+      </PageHeader>
+      <Surface>
         <h2>Current support path</h2>
         <p>Support is documented as a placeholder route until a dedicated contact workflow is added.</p>
-      </section>
+      </Surface>
     </main>
   );
 }
@@ -253,13 +254,13 @@ function SupportPage() {
 function LegalPage({ title, body }: { title: string; body: string }) {
   return (
     <main className="content page narrow-page">
-      <header className="page-head page-header">
+      <PageHeader>
         <div>
           <span className="page-kicker kicker">WhySpend</span>
           <h1 className="page-title">{title}</h1>
           <p>{body}</p>
         </div>
-      </header>
+      </PageHeader>
     </main>
   );
 }
@@ -316,7 +317,7 @@ export function InviteAcceptancePage() {
 
   return (
     <main className="page narrow-page">
-      <section className="surface">
+      <Surface>
         <p className="kicker">Household invitation</p>
         <h1>Join a shared WhySpend household</h1>
         <p className="muted">{status}</p>
@@ -330,7 +331,7 @@ export function InviteAcceptancePage() {
             Sign in to continue
           </Link>
         ) : null}
-      </section>
+      </Surface>
     </main>
   );
 }

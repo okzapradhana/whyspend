@@ -85,7 +85,7 @@ test("captures navigation timing evidence for the 10-second target", async ({ pa
 
   await captureTiming("transactions-to-savings-goals", async () => {
     await page.getByRole("link", { name: /savings goals/i }).click();
-    await expect(page.getByRole("heading", { level: 1, name: "Savings Goals" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Savings goals" })).toBeVisible();
   });
 });
 
@@ -106,7 +106,7 @@ test("monthly workflow covers dashboard, transaction entry, Settings budget upda
 
     await page.getByRole("link", { name: /transactions/i }).click();
     await page.getByRole("button", { name: /add transaction/i }).click();
-    await expect(page.getByRole("dialog", { name: /add expense/i })).toBeVisible();
+    await expect(page.getByRole("dialog", { name: /add transaction/i })).toBeVisible();
     await page.getByLabel("Amount").fill("281000");
     await page.getByLabel("Category").selectOption({ label: "Subscription" });
     await page.getByLabel(/note/i).fill("Monthly subscription");
@@ -118,8 +118,8 @@ test("monthly workflow covers dashboard, transaction entry, Settings budget upda
     await expect(page.getByRole("table", { name: /categories and monthly budgets/i })).toBeVisible();
 
     await page.getByRole("link", { name: /savings goals/i }).click();
-    await expect(page.getByRole("heading", { level: 1, name: "Savings Goals" })).toBeVisible();
-    await expect(page.getByText("Total Savings Progress")).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Savings goals" })).toBeVisible();
+    await expect(page.getByText("Total savings progress")).toBeVisible();
   });
 });
 
@@ -137,7 +137,7 @@ test("mobile keyboard, focus, reduced-motion, and overflow checks", async ({ pag
 
   await menu.click();
   await page.getByRole("link", { name: /savings goals/i }).click();
-  await expect(page.getByRole("heading", { level: 1, name: "Savings Goals" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "Savings goals" })).toBeVisible();
   const hasHorizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   expect(hasHorizontalOverflow).toBe(false);
 });

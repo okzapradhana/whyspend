@@ -59,9 +59,9 @@
 .pie-svg .pie-slice {
   fill: none;
   stroke: var(--slice-color, var(--accent));
-  stroke-width: 12;
+  stroke-width: 36;
   stroke-linecap: butt;
-  transform-origin: 60px 60px;
+  transform-origin: 180px 180px;
 }
 
 .pie-slice {
@@ -75,7 +75,7 @@
 .pie-svg .pie-slice:hover,
 .pie-svg .pie-slice:focus,
 .pie-svg .pie-slice.active {
-  stroke-width: 15;
+  stroke-width: 45;
   filter: drop-shadow(0 6px 12px color-mix(in oklab, var(--slice-color), transparent 50%));
   opacity: 1;
   cursor: pointer;
@@ -84,11 +84,11 @@
 .pie-center-text {
   pointer-events: none;
   transform: rotate(90deg);
-  transform-origin: 60px 60px;
+  transform-origin: 180px 180px;
 }
 
 .pie-center-label {
-  font-size: 5.5px;
+  font-size: var(--text-base);
   font-weight: 700;
   fill: var(--muted);
   text-transform: uppercase;
@@ -96,19 +96,19 @@
 }
 
 .pie-center-value {
-  font-size: 9.5px;
+  font-size: var(--text-2xl);
   font-weight: 800;
   fill: var(--ink);
 }
 
 .pie-center-sub {
-  font-size: 4.5px;
+  font-size: var(--text-sm);
   font-weight: 560;
   fill: var(--muted);
 }
 
 .pie-slice-percentage {
-  font-size: 4px;
+  font-size: var(--text-xs);
   font-weight: 700;
   fill: var(--accent-on);
   pointer-events: none;
@@ -180,7 +180,7 @@
   align-items: center;
   gap: var(--space-3);
   width: 100%;
-  min-height: 36px;
+  min-height: 44px;
 }
 
 .chart-legend button {
@@ -188,7 +188,7 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: var(--space-2) var(--space-3);
   border: 0;
-  border-radius: 10px;
+  border-radius: var(--radius);
   padding: var(--space-2);
   background: transparent;
   color: var(--ink);
@@ -221,7 +221,7 @@
   width: 12px;
   height: 12px;
   flex: 0 0 auto;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .dot.primary {
@@ -261,9 +261,9 @@
   display: grid;
   gap: 6px;
   padding: 16px;
-  border-radius: 24px;
+  border-radius: var(--radius-xl);
   background: var(--surface-raised);
-  box-shadow: 0 20px 40px oklch(0.41 0.08 154 / 0.06);
+  box-shadow: var(--shadow-card);
 }
 
 .income-expense-summary span,
@@ -349,8 +349,8 @@
   position: relative;
   height: 14px;
   overflow: hidden;
-  border-radius: 999px;
-  background: oklch(0.92 0.03 154);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
 }
 
 .bar-track {
@@ -430,7 +430,7 @@
 }
 
 .delta-arrow {
-  font-size: 10px;
+  font-size: var(--text-xs);
 }
 
 .trend-card .card-head {
@@ -579,7 +579,7 @@
   bottom: calc(100% + var(--space-2));
   width: max-content;
   max-width: 220px;
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: var(--space-2) var(--space-3);
   background: color-mix(in oklab, var(--fg), transparent 6%);
   color: var(--surface);
@@ -632,7 +632,7 @@
   top: -3px;
   bottom: -3px;
   width: 3px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--secondary);
 }
 
@@ -647,7 +647,7 @@
 
 .insight-card button {
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 10px 14px;
   background: var(--secondary-container);
   color: var(--on-secondary-container);
@@ -655,11 +655,11 @@
 }
 
 .insight-card--attention {
-  background: oklch(0.96 0.025 29);
+  background: color-mix(in oklab, var(--danger), var(--surface) 92%);
 }
 
 .insight-card--positive {
-  background: oklch(0.94 0.045 154);
+  background: color-mix(in oklab, var(--accent), var(--surface) 88%);
 }
 
 .drilldown-list,

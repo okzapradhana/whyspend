@@ -48,7 +48,7 @@ export function HouseholdSetupPage() {
             Create your household workspace.
           </h1>
 
-          <p className="muted" style={{ fontSize: "var(--text-sm)", marginBottom: "var(--space-6)", color: "var(--fg-3)" }}>
+          <p className="muted" style={{ fontSize: "var(--text-sm)", marginBottom: "var(--space-6)", color: "var(--fg-2)" }}>
             This is where both members will enter records, manage categories, and review monthly totals.
           </p>
 
@@ -87,4 +87,3 @@ export function HouseholdSetupPage() {
     </main>
   );
 }
-

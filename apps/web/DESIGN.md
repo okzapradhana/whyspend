@@ -1,6 +1,6 @@
 # WhySpend Design System
 
-WhySpend uses the Serene Union design system. This document is the human-readable source of truth for palette, typography, spacing, radii, elevation, and core component styling. The live frontend implementation currently maps design tokens through CSS custom properties in `src/styles/app.css`.
+WhySpend uses the Serene Union design system. This document is the human-readable source of truth for palette, typography, spacing, radii, elevation, and core component styling. OpenDesign screens are historical baseline evidence, but they do not override this token and accessibility contract. The live frontend implementation maps design tokens through CSS custom properties in `src/styles/app.css`.
 
 ## Token Reference
 
@@ -166,9 +166,17 @@ Shapes use high-radius corners to communicate safety and approachability.
 
 ## Components
 
-- Buttons: primary buttons are pill-shaped with a Sage Green background. Text is white or high-contrast slate. Avoid ghost buttons with borders; use soft-tinted backgrounds for secondary actions instead.
+- Buttons: primary buttons use an 8px corner radius with a Sage Green background. Text is white or high-contrast slate. Avoid ghost buttons with borders; use soft-tinted backgrounds for secondary actions instead.
 - Cards: the central component. Cards use a 24px corner radius and an ambient shadow. Do not use borders.
 - Input fields: soft beige backgrounds with no borders in their default state. On focus, show a Soft Blue 2px glow rather than a hard stroke.
 - Progress bars: used for savings goals. Use 12px height with fully rounded caps. Tracks use a very pale Primary color, and indicators use full Sage Green.
 - Shared avatars: for the couple's profile, use overlapping circles with a 2px white cutout border to signify union and collaboration.
 - Lists: transaction lists use 16px vertical padding per row and subtle horizontal dividers in a very light neutral tone.
+
+## Consistency Contract
+
+- Live product typography uses only 12, 14, 16, 18, 20, 24, 32, and 40px. Page titles are 32/40 on desktop and 24/32 on mobile.
+- Financial values use Inter with tabular figures. Monospace is not used for currency.
+- Controls, buttons, and filters use 8px corners; menus use 12-16px corners; cards and dialogs use 24px corners. Fully rounded shapes are reserved for navigation selections, statuses, avatars, progress tracks, and compact icon actions such as the mobile FAB.
+- `PageHeader`, `Surface`, `Toolbar`, `TableFrame`, `EmptyState`, `LoadingState`, and `StatusChip` own shared geometry. Feature styles may arrange these primitives but must not redefine their core contract.
+- Run `pnpm test:design-system` before completing UI work. The focused redesign spec and screenshot evidence live in `specs/005-design-system-consistency/` and `../../docs/screenshots/design-system-redesign/`.

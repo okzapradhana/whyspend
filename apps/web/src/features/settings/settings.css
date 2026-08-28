@@ -138,6 +138,7 @@
 }
 
 .settings-budget-trigger {
+  min-height: 44px;
   border: 0;
   border-radius: var(--radius-sm);
   padding: 7px 9px;
@@ -177,9 +178,9 @@
 
 .settings-row-menu__trigger,
 .settings-row-menu__trigger.button {
-  width: 38px;
-  height: 38px;
-  min-height: 38px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
   border-radius: var(--radius-pill);
   padding: 0;
 }
@@ -211,7 +212,7 @@
   align-items: center;
   gap: var(--space-2);
   width: 100%;
-  min-height: 38px;
+  min-height: 44px;
   border: 0;
   border-radius: var(--radius-sm);
   padding: var(--space-2) var(--space-3);
@@ -282,7 +283,7 @@
 
 .inline-budget__status {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   font-variant-numeric: tabular-nums;
 }
 
@@ -300,20 +301,20 @@
 
 .inline-budget__field input {
   width: 100%;
-  min-height: 40px;
+  min-height: 44px;
   border: 0;
   border-radius: var(--radius-sm);
   padding: 8px 12px;
   background: var(--surface-container);
   color: var(--ink);
   font-variant-numeric: tabular-nums;
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
 }
 
 .inline-budget .field-error {
   grid-column: 1 / -1;
   color: var(--danger) !important;
-  font-size: 0.84rem;
+  font-size: var(--text-xs);
 }
 
 .settings-access-card {
@@ -370,7 +371,7 @@
 
 .settings-invitation-link input {
   min-width: 0;
-  min-height: 38px;
+  min-height: 44px;
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-sm);
   padding: 8px 10px;
@@ -380,7 +381,7 @@
 }
 
 .settings-invitation-link .button {
-  min-height: 38px;
+  min-height: 44px;
   white-space: nowrap;
 }
 
@@ -514,44 +515,44 @@
 
 .settings-budget-panel {
   display: grid;
-  gap: 18px;
+  gap: var(--space-5);
 }
 
 .budget-list {
   display: grid;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .budget-row {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(180px, 0.8fr) auto;
-  gap: 16px;
+  gap: var(--space-4);
   align-items: end;
-  padding: 18px;
-  border-radius: 24px;
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
   background: var(--surface-raised);
-  box-shadow: 0 20px 40px oklch(0.41 0.08 154 / 0.06);
+  box-shadow: var(--shadow-card);
 }
 
 .budget-row__copy,
 .budget-row__field {
   display: grid;
-  gap: 6px;
+  gap: var(--space-2);
   min-width: 0;
 }
 
 .budget-row__copy span,
 .budget-row__field span {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
 }
 
 .budget-row__field input {
   width: 100%;
   min-height: 44px;
   border: 0;
-  border-radius: 12px;
-  padding: 10px 12px;
+  border-radius: var(--radius);
+  padding: var(--space-3);
   background: var(--surface-container);
   color: var(--ink);
   font-variant-numeric: tabular-nums;
@@ -559,7 +560,7 @@
 
 .budget-row__actions {
   display: flex;
-  gap: 8px;
+  gap: var(--space-2);
   flex-wrap: wrap;
   justify-content: flex-end;
 }

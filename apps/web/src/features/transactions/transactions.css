@@ -4,11 +4,19 @@
   gap: var(--space-5);
 }
 
+.transactions-page .button {
+  border-radius: var(--radius-sm);
+}
+
 .transactions-head {
   align-items: flex-end;
 }
 
 .transactions-head .actions {
+  justify-content: flex-end;
+}
+
+.transactions-head .toolbar {
   justify-content: flex-end;
 }
 
@@ -45,7 +53,7 @@
   gap: var(--space-1);
   justify-content: flex-end;
   padding: var(--space-1);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   background: var(--surface-container-low);
 }
 
@@ -57,9 +65,9 @@
 }
 
 .filter-button {
-  min-height: 38px;
+  min-height: 44px;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   padding: var(--space-2) var(--space-3);
   background: transparent;
   color: var(--fg-2);
@@ -73,7 +81,7 @@
 .filter-button:hover,
 .filter-button.active {
   background: var(--surface-container-lowest);
-  color: #274b5b;
+  color: var(--on-secondary-container);
   box-shadow: var(--shadow-card);
 }
 
@@ -82,8 +90,11 @@
 }
 
 .transactions-page .surface:first-of-type {
-  background:
-    linear-gradient(180deg, oklch(0.995 0.004 164), var(--surface));
+  background: var(--surface);
+}
+
+.desktop-add-transaction {
+  align-self: end;
 }
 
 .transactions-page .fab-button.button.button-icon {
@@ -93,7 +104,7 @@
   left: auto;
   top: auto;
   z-index: 50;
-  display: grid;
+  display: none;
   place-items: center;
   width: 64px;
   height: 64px;
@@ -116,7 +127,7 @@
 
 .transactions-page .fab-button.button.button-icon:hover,
 .transactions-page .fab-button.button.button-icon:focus-visible {
-  background: color-mix(in oklab, var(--accent), black 8%);
+  background: color-mix(in oklab, var(--accent), var(--fg) 8%);
   outline: none;
   transform: translateY(-2px);
 }
@@ -129,7 +140,7 @@
   width: min(560px, 100%);
   max-height: min(760px, 92vh);
   overflow: hidden;
-  border-radius: 32px;
+  border-radius: var(--radius-xl);
   padding: 0;
   background: var(--surface-container-lowest);
   box-shadow: var(--shadow-soft);
@@ -153,11 +164,11 @@
 .transaction-dialog .modal-close {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  min-height: 40px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   padding: 0;
   background: transparent;
   color: var(--fg-2);
@@ -195,7 +206,7 @@
 }
 
 .transaction-dialog .amount-entry label,
-.transaction-dialog .modal-field > span:first-child {
+.transaction-dialog .field > span:first-child {
   color: var(--fg-2);
   font-size: var(--text-sm);
   font-weight: 600;
@@ -238,14 +249,14 @@
   display: flex;
   gap: var(--space-1);
   padding: var(--space-1);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   background: var(--surface-container-low);
 }
 
 .transaction-dialog .transaction-toggle button {
-  min-height: 40px;
+  min-height: 44px;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   padding: var(--space-2) var(--space-6);
   background: transparent;
   color: var(--fg-2);
@@ -271,7 +282,7 @@
   width: 100%;
 }
 
-.transaction-dialog .modal-field {
+.transaction-dialog .field {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
@@ -283,7 +294,7 @@
   align-items: center;
   gap: var(--space-3);
   min-height: 52px;
-  border-radius: 14px;
+  border-radius: var(--radius-sm);
   padding: 0 var(--space-4);
   background: var(--surface-container-low);
   color: var(--fg);
@@ -292,9 +303,9 @@
     box-shadow var(--motion-fast) var(--ease-standard);
 }
 
-.transaction-dialog .modal-field input,
-.transaction-dialog .modal-field select,
-.transaction-dialog .modal-field textarea {
+.transaction-dialog .field input,
+.transaction-dialog .field select,
+.transaction-dialog .field textarea {
   width: 100%;
   border: 0;
   color: var(--fg);
@@ -302,27 +313,27 @@
   line-height: 1.5;
 }
 
-.transaction-dialog .modal-field input,
-.transaction-dialog .modal-field select {
+.transaction-dialog .field input,
+.transaction-dialog .field select {
   min-height: 52px;
   padding: 0;
   background: transparent;
 }
 
-.transaction-dialog .modal-field > select.soft-input {
+.transaction-dialog .field > select.soft-input {
   padding: 0 var(--space-4);
   background: var(--surface-container-low);
 }
 
-.transaction-dialog .modal-field textarea {
+.transaction-dialog .field textarea {
   min-height: 104px;
   resize: none;
-  border-radius: 14px;
+  border-radius: var(--radius-sm);
   padding: var(--space-3) var(--space-4);
   background: var(--surface-container-low);
 }
 
-.transaction-dialog .modal-field textarea::placeholder {
+.transaction-dialog .field textarea::placeholder {
   color: var(--muted);
 }
 
@@ -334,20 +345,20 @@
 }
 
 .transaction-dialog .soft-input:hover,
-.transaction-dialog .modal-field > select.soft-input:hover,
-.transaction-dialog .modal-field textarea:hover {
+.transaction-dialog .field > select.soft-input:hover,
+.transaction-dialog .field textarea:hover {
   background: var(--surface-container);
 }
 
 .transaction-dialog .soft-input:focus-within,
-.transaction-dialog .modal-field > select.soft-input:focus,
-.transaction-dialog .modal-field textarea:focus {
+.transaction-dialog .field > select.soft-input:focus,
+.transaction-dialog .field textarea:focus {
   outline: none;
   box-shadow: var(--focus-ring);
 }
 
-.transaction-dialog .modal-field input:focus,
-.transaction-dialog .modal-field select:focus {
+.transaction-dialog .field input:focus,
+.transaction-dialog .field select:focus {
   outline: none;
 }
 
@@ -370,7 +381,7 @@
   min-width: 128px;
   min-height: 44px;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   padding: var(--space-2) var(--space-6);
   font-size: var(--text-sm);
   font-weight: 700;
@@ -402,6 +413,15 @@
     width: 100%;
   }
 
+  .transactions-head .toolbar {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .transactions-page .desktop-add-transaction.button {
+    display: none;
+  }
+
   .transactions-head .month-picker {
     width: 100%;
   }
@@ -413,7 +433,7 @@
   .filter-group {
     justify-content: flex-start;
     width: 100%;
-    border-radius: 18px;
+    border-radius: var(--radius-sm);
   }
 
   .filter-label {
@@ -430,12 +450,13 @@
   }
 
   .transactions-page .fab-button.button.button-icon {
+    display: grid;
     right: clamp(20px, 4vw, 44px);
     bottom: clamp(20px, 4vw, 44px);
   }
 
   .transaction-dialog .dialog.transaction-modal {
-    border-radius: 28px;
+    border-radius: var(--radius-xl);
   }
 
   .transaction-dialog .modal-head,
@@ -455,5 +476,62 @@
 
   .transaction-dialog .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .transactions-page .table-frame {
+    overflow: visible;
+  }
+
+  .transactions-page .data-table,
+  .transactions-page .data-table tbody,
+  .transactions-page .data-table tr,
+  .transactions-page .data-table td {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .transactions-page .data-table {
+    min-width: 0;
+  }
+
+  .transactions-page .data-table thead {
+    display: none;
+  }
+
+  .transactions-page .data-table tbody {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .transactions-page .data-table tr {
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+  }
+
+  .transactions-page .data-table td {
+    display: grid;
+    grid-template-columns: minmax(92px, 0.42fr) minmax(0, 1fr);
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    overflow-wrap: anywhere;
+    text-align: left !important;
+  }
+
+  .transactions-page .data-table td::before {
+    content: attr(data-label);
+    color: var(--fg-2);
+    font-size: var(--text-xs);
+    font-weight: 750;
+  }
+
+  .transactions-page .data-table .row-actions {
+    align-items: stretch;
+  }
+
+  .transactions-page .data-table .row-actions .button {
+    flex: 1 1 96px;
   }
 }

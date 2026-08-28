@@ -71,16 +71,16 @@ export function HistoricalIncomeExpenseChart({ data }: { data: HistoricalIncomeE
       <svg viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <linearGradient id="income-gradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#416743" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#416743" stopOpacity="0.0" />
+            <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.0" />
           </linearGradient>
           <linearGradient id="expense-gradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#406373" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#406373" stopOpacity="0.0" />
+            <stop offset="0%" stopColor="var(--secondary)" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="var(--secondary)" stopOpacity="0.0" />
           </linearGradient>
           <linearGradient id="savings-gradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#615e57" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#615e57" stopOpacity="0.0" />
+            <stop offset="0%" stopColor="var(--tertiary)" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="var(--tertiary)" stopOpacity="0.0" />
           </linearGradient>
         </defs>
         

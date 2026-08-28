@@ -5,6 +5,7 @@ import { useAuth } from "../../app/authState";
 import { Button } from "../../components/Button";
 import { Dialog } from "../../components/Dialog";
 import { StatusMessage } from "../../components/StatusMessage";
+import { EmptyState, LoadingState, PageHeader, Surface } from "../../components/design-system";
 import { createSavingsGoal, deleteSavingsGoal, listSavingsGoals, updateSavingsGoal } from "../../lib/api/savingsGoals";
 import type { SavingsGoal } from "../../lib/api/types";
 import { formatMoney, formatPercent, ratioPercent } from "../../lib/finance";
@@ -107,21 +108,21 @@ export function SavingsGoalsPage() {
 
   return (
     <main className="content page savings-goals-page">
-      <header className="page-head savings-head page-header" data-od-id="savings-head">
+      <PageHeader className="savings-head" data-od-id="savings-head">
         <div>
-          <h1 className="page-title">Savings Goals</h1>
+          <h1 className="page-title">Savings goals</h1>
           <p className="page-kicker">Track shared dreams and personal targets without mixing them into expense totals.</p>
         </div>
-        <Button className="btn-primary" type="button" icon={<Plus size={18} />} onClick={() => openForm()}>
+        <Button type="button" icon={<Plus size={18} />} onClick={() => openForm()}>
           Add new goal
         </Button>
-      </header>
+      </PageHeader>
       {status ? <StatusMessage tone="error">{status}</StatusMessage> : null}
 
-      <section className="savings-summary card card-soft" aria-label="Savings goal summary" data-od-id="savings-summary">
+      <Surface className="savings-summary card-soft" aria-label="Savings goal summary" data-od-id="savings-summary">
         <div className="card-head">
           <div>
-            <h2 className="card-title">Total Savings Progress</h2>
+            <h2 className="card-title">Total savings progress</h2>
             <p className="card-subtitle">Summary of ledger contributions across all goals.</p>
           </div>
           <span className="status good">{formatPercent(progress)}</span>
@@ -130,23 +131,23 @@ export function SavingsGoalsPage() {
         <div className="progress" aria-label={`Total savings progress ${formatPercent(progress)}`}>
           <span style={{ "--value": `${progress * 100}%` } as CSSProperties} />
         </div>
-      </section>
+      </Surface>
 
       <section className="grid grid-2 goal-grid" aria-label="Savings goals" data-od-id="goal-cards">
         {loading ? (
-          <div className="skeleton-block">Loading savings goals...</div>
+          <LoadingState>Loading savings goals...</LoadingState>
         ) : goals.length ? (
           goals.map((goal) => <SavingsGoalCard key={goal.id} goal={goal} onEdit={openForm} onDelete={setDeleting} />)
         ) : (
-          <div className="empty-state">
+          <EmptyState>
             <h2>No savings goals yet</h2>
             <p>Add the first goal so savings transactions have a dedicated target.</p>
-          </div>
+          </EmptyState>
         )}
       </section>
 
       <Dialog
-        title={editing ? "Edit Goal" : "Add New Goal"}
+        title={editing ? "Edit goal" : "Add new goal"}
         description={editing ? "Update your target details for a clearer path to your future." : "Set a clear target for your shared future. Every small step counts."}
         open={formOpen}
         onClose={() => setFormOpen(false)}
@@ -169,7 +170,7 @@ export function SavingsGoalsPage() {
         <div className="delete-goal-content">
           <div className="delete-goal-head">
             <Trash2 aria-hidden="true" />
-            <h2>Delete Goal?</h2>
+            <h2>Delete goal?</h2>
           </div>
           <p>
             Are you sure you want to delete <strong>{deleting?.name ? `'${deleting.name}'` : "this goal"}</strong>? This action cannot be undone.
