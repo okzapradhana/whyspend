@@ -177,6 +177,29 @@ export async function getMonthlySummary(householdId: string, month: string) {
   const transactions = txRes.data || [];
   const budgets = budgetsRes.data || [];
 
+  // Household-scoped identity resolution: fail fast on projection error (do not masquerade as missing Member)
+  const ownerIdentityMap = new Map<string, string>();
+  const idSet = [...new Set(transactions.map((r: any) => r.ownerUserId as string))];
+  if (idSet.length) {
+    const { data: identData, error: identError } = await supabase
+      .from("household_member_identity")
+      .select("userId, displayName")
+      .eq("householdId", householdId)
+      .in("userId", idSet);
+    if (identError) {
+      throw new Error(`household_member_identity lookup failed: ${identError.message} (code=${(identError as any).code ?? "unknown"}) — ensure migration 20260829000000_household_member_identity is applied`);
+    }
+    for (const row of (identData as Array<{ userId: string; displayName: string }> | null) ?? []) {
+      ownerIdentityMap.set(row.userId, row.displayName);
+    }
+  }
+  // Only fallback to embedded owner for legacy rows where projection had no entry but embedded join succeeded
+  for (const r of transactions as any[]) {
+    if (r.owner?.displayName && !ownerIdentityMap.has(r.ownerUserId)) {
+      ownerIdentityMap.set(r.ownerUserId, r.owner.displayName);
+    }
+  }
+
   const totals = {
     ...emptyTotals,
     remainingDifference: 0,
@@ -214,7 +237,7 @@ export async function getMonthlySummary(householdId: string, month: string) {
 
     const existingMember = memberMap.get(record.ownerUserId) ?? {
       userId: record.ownerUserId,
-      displayName: (record as any).owner?.displayName || "Member",
+      displayName: ownerIdentityMap.get(record.ownerUserId) ?? (record as any).owner?.displayName ?? "Member",
       income: 0,
       expenses: 0,
       savings: 0

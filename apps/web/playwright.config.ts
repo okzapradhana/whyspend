@@ -6,16 +6,17 @@ const webUrl = `http://127.0.0.1:${webPort}`;
 const apiUrl = `http://127.0.0.1:${apiPort}`;
 const fixtureOnly = process.env.PLAYWRIGHT_FIXTURE_ONLY === "1";
 
+const strictPort = process.env.PLAYWRIGHT_STRICT_PORT === "1";
 const apiServer = {
   command: `PORT=${apiPort} CORS_ORIGIN=${webUrl} pnpm --dir ../.. --filter @whyspend/api dev`,
   url: `${apiUrl}/health`,
-  reuseExistingServer: true
+  reuseExistingServer: !strictPort
 };
 
 const webServer = {
-  command: `${fixtureOnly ? "" : `VITE_API_BASE_URL=${apiUrl}/api `}pnpm exec vite --host 127.0.0.1 --port ${webPort}`,
+  command: `${fixtureOnly ? "" : `VITE_API_BASE_URL=${apiUrl}/api `}pnpm exec vite --host 127.0.0.1 --port ${webPort} --strictPort`,
   url: webUrl,
-  reuseExistingServer: true
+  reuseExistingServer: !strictPort
 };
 
 export default defineConfig({
