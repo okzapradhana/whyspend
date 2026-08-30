@@ -11,12 +11,12 @@ This repository is the frontend only. The API and PostgreSQL access live in the 
 - Household invitations with owner-created links and a seven-day refresh path for an authenticated invited email when a pending link expires; refreshed links keep the current browser origin.
 - User-created income, expense, and savings categories.
 - Category rename, archive, delete, duplicate protection, and in-use deletion conflict handling.
-- Transaction create, list, edit, and delete with type, amount, date, category or savings goal, owner, scope, and note. The Transactions floating add button opens the OpenDesign source-style dialog, and savings transactions select an existing savings goal instead of creating one inline.
+- Transaction create, list, edit, and delete with type, amount, date, category or savings goal, owner, scope, and note. Household owner names are resolved through the household-scoped `household_member_identity` projection without broadening private `User` row access. The Transactions floating add button opens the OpenDesign source-style dialog, and savings transactions select an existing savings goal instead of creating one inline.
 - Dashboard rebuilt directly from the OpenDesign source with three monthly metrics, monthly spending by category, Budget Health, and Cash Flow Trend for income, expenses, and savings.
 - Settings-owned category and monthly expense budget management with inherited defaults, validation, edit, and remove flows. Expense, income, and savings-goal categories are configured from Settings and reused by transaction entry.
 - Savings Goals route backed by household savings categories, savings-transaction progress, add/edit/delete dialogs, and client-side target/date metadata until a dedicated savings-goal API exists.
 - OpenDesign direct-port responsive desktop/mobile UI with source HTML/CSS selector traceability, a light product shell, desktop rail, mobile hamburger drawer, Dashboard, Transactions, Settings, Savings Goals, Support placeholder, accessible forms, tables, visual regression coverage, and PWA manifest and service worker assets.
-- API-only persistence boundary: the frontend calls HTTP APIs and does not import PostgreSQL clients, migrations, or database credentials.
+- Persistence boundary: current product flows use Supabase Auth and the browser-safe Supabase client for direct Data API access; the Fastify/Prisma API path remains available for API-specific workflows and tests. The frontend does not import PostgreSQL clients or database credentials.
 
 ## Planned Feature Specs
 
