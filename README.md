@@ -126,7 +126,7 @@ Seed demo API data:
 pnpm db:seed
 ```
 
-The Prisma schema lives at `apps/api/prisma/schema.prisma`. Existing migrations enable RLS and include fixes for the `HouseholdMember` recursion policy and initial household creation policy.
+The Prisma schema lives at `apps/api/prisma/schema.prisma`. Existing migrations enable RLS and include fixes for the `HouseholdMember` recursion policy and initial household creation policy. The household member identity migration adds a household-scoped `household_member_identity` projection containing only `householdId`, `userId`, and `displayName`; it does not broaden direct `User` row access.
 
 ## Development
 
@@ -190,7 +190,7 @@ pnpm db:seed
 - Auth: sign up, sign in, sign out, Supabase session refresh
 - Household setup: create a shared household, invite another member, keep pending invitation links available in Settings, and accept invitation links
 - Dashboard: monthly income, expenses, savings, budgets, charts, category drill-downs
-- Transactions: create, edit, delete, and list income, expense, and savings records
+- Transactions: create, edit, delete, and list income, expense, and savings records. Household transaction owners are resolved through a minimal household-scoped identity projection, while transaction visibility remains controlled by RLS.
 - Categories: manage income, expense, and savings categories
 - Budgets: set monthly category budgets and compare actual spending against budget
 - Savings goals: track target amount, starting amount, target date, and savings transactions
@@ -223,6 +223,7 @@ When changing schema or policies:
 - Do not use deprecated `auth.role()` checks.
 - Do not put `service_role` or secret keys in `apps/web`.
 - Preserve the non-recursive `HouseholdMember` access pattern and the initial `Household` insert path.
+- Keep household member identity lookups limited to the projection's minimal fields and household membership boundary; do not expose private `User` fields through the view.
 
 See `LESSONS.md` before making schema or data-access changes.
 

@@ -51,9 +51,9 @@ export function TransactionsPage() {
       const matchesType = typeFilter === "all" || transaction.type === typeFilter;
       const matchesSearch =
         !query ||
-        transaction.category.name.toLowerCase().includes(query) ||
-        transaction.owner.displayName.toLowerCase().includes(query) ||
-        transaction.note?.toLowerCase().includes(query);
+        (transaction.category?.name ?? "").toLowerCase().includes(query) ||
+        (transaction.owner?.displayName ?? "Member").toLowerCase().includes(query) ||
+        (transaction.note ?? "").toLowerCase().includes(query);
       return matchesType && matchesSearch;
     });
   }, [search, transactions, typeFilter]);

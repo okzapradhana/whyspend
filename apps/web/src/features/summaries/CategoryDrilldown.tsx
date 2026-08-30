@@ -28,8 +28,8 @@ export function CategoryDrilldown({
       {transactions.map((transaction) => (
         <article key={transaction.id} className="drilldown-row">
           <div>
-            <strong>{transaction.note || transaction.category.name}</strong>
-            <span>{transaction.occurredOn} · {transaction.owner.displayName}</span>
+            <strong>{transaction.note || transaction.category?.name || "Category"}</strong>
+            <span>{transaction.occurredOn} · {transaction.owner?.displayName ?? "Member"}</span>
           </div>
           <strong>{formatMoney(transaction.amount)}</strong>
         </article>

@@ -60,8 +60,8 @@ export function TransactionList({
             <tr key={transaction.id}>
               <td data-label="Date">{transaction.occurredOn}</td>
               <td data-label="Type"><StatusChip className={`type-${transaction.type}`}>{typeLabel[transaction.type]}</StatusChip></td>
-              <td data-label="Category / Goal">{transaction.category.name}</td>
-              <td data-label="Owner">{transaction.owner.displayName}</td>
+              <td data-label="Category / Goal">{transaction.category?.name ?? "Category"}</td>
+              <td data-label="Owner">{transaction.owner?.displayName ?? "Member"}</td>
               <td data-label="Notes">{transaction.note ?? (transaction.scope === "household" ? "Household" : "Personal")}</td>
               <td data-label="Amount" className="align-right money">{formatMoney(transaction.amount)}</td>
               <td data-label="Actions">

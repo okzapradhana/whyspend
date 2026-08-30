@@ -135,6 +135,19 @@ function filterRows(table: string, state: FixtureState, url: URL) {
     if (fields.replaceAll(" ", "") === "month,type,amount") return selected.map(({ month, type: rowType, amount }) => ({ month, type: rowType, amount }));
     return selected;
   }
+  if (table === "household_member_identity") {
+    // Household-scoped identity projection: only userId + displayName
+    const householdId = url.searchParams.get("householdId")?.replace("eq.", "");
+    const userIdsParam = url.searchParams.get("userId");
+    const requested = userIdsParam?.startsWith("in.") ? userIdsParam.slice(3).replace(/[()]/g, "").split(",") : null;
+    const members = [
+      { userId: REVIEW_USER.id, displayName: REVIEW_USER.displayName, householdId: REVIEW_HOUSEHOLD.id },
+      { userId: "spouse-user", displayName: "Ajeng", householdId: REVIEW_HOUSEHOLD.id },
+    ];
+    let rows = householdId ? members.filter((m) => m.householdId === householdId) : members;
+    if (requested) rows = rows.filter((m) => requested.includes(m.userId));
+    return rows;
+  }
   if (table === "CategoryBudget") return state.budgets;
   if (table === "SavingsGoal") return state.goals;
   if (table === "HouseholdInvitation") return [];

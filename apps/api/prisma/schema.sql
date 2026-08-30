@@ -214,3 +214,17 @@ ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_createdByUserId_fkey" FORE
 -- AddForeignKey
 ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_updatedByUserId_fkey" FOREIGN KEY ("updatedByUserId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- Household member identity projection (household-scoped, minimal fields)
+CREATE OR REPLACE VIEW public."household_member_identity"
+WITH (security_invoker = false) AS
+SELECT
+  hm."householdId" AS "householdId",
+  u.id AS "userId",
+  u."displayName" AS "displayName"
+FROM public."User" u
+JOIN public."HouseholdMember" hm ON hm."userId" = u.id
+WHERE hm."householdId" IN (SELECT public.get_user_households());
+GRANT SELECT ON public."household_member_identity" TO authenticated;
+REVOKE ALL ON public."household_member_identity" FROM anon;
+GRANT EXECUTE ON FUNCTION public.get_user_households() TO authenticated;
+
